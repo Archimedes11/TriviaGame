@@ -43,9 +43,16 @@
 
   #game{
     text-align: center;
+
+  }
+
+  .bottons{
     margin-left: 30%;
     margin-right: 30%;
 
+  }
+  #timer{
+    color: red;
   }
 
   
