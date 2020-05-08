@@ -26,6 +26,7 @@
     color: #f1f1f1;
     width: 50%;
     text-align: center;
+    margin-bottom: 20px;
   }
 
   body{
@@ -53,6 +54,11 @@
   }
   #timer{
     color: red;
+  }
+
+  img{
+    height: 100px;
+    width: 100px;
   }
 
   

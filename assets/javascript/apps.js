@@ -70,6 +70,9 @@ $(document).ready(function () {
             console.log(event.toElement.id);
             if (event.toElement.id === "optionThree")
                 console.log("adam");
+                $("#image").append("<img src=assets/images/Hardware.png></img>");
+
+
 
 
 
