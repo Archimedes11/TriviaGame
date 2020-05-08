@@ -13,7 +13,7 @@ $(document).ready(function () {
         {
             question: "<h4>The generic term for the mechanical, electrical and electronic components of a computer are called what?<h4>",
             choices: ["Freeware", "Software", "Hardware", "Malware"],
-            correctAnswer: 3,
+            correctAnswer: 2,
             imgSource: "assets/images/Hardware.png",
         },
         {
@@ -24,19 +24,47 @@ $(document).ready(function () {
 
         },
         {
-            question: "<h4>The generic term for the mechanical, electrical and electronic components of a computer are called what?<h4>",
-            choices: ["Freeware", "Software", "Hardware", "Malware"],
-            correctAnswer: 3,
-            imgSource: "assets/images/Hardware.png",
+            question: "<h4>Which of the following is not a computer language?<h4>",
+            choices: ["Python", "C++", "Lotus", "Java"],
+            correctAnswer: 2,
+            imgSource: "assets/images/Lotus.jpeg",
 
         },
         {
-            question: "<h4>The generic term for the mechanical, electrical and electronic components of a computer are called what?<h4>",
-            choices: ["Freeware", "Software", "Hardware", "Malware"],
+            question: "<h4>Which web browser was developed by Google?<h4>",
+            choices: ["Firefox", "Netscape", "Safari", "Chrome"],
             correctAnswer: 3,
-            imgSource: "assets/images/Hardware.png",
+            imgSource: "assets/images/Chrome.jpg",
+
+        },
+        {
+            question: "<h4>The GUI stand for :<h4>",
+            choices: ["General User Interaction", "Graphical User Interface", "Guided User Interface", "General User Interface"],
+            correctAnswer: 1,
+            imgSource: "assets/images/GUI.jpg",
+        },
+        {
+            question: "<h4>Errors in computer programmes are called :<h4>",
+            choices: ["Mistakes", "Follies", "Trash", "Bugs"],
+            correctAnswer: 3,
+            imgSource: "assets/images/Bugs.jpg",
+
+        },
+        {
+            question: "<h4>Who is considered as the father of computing?<h4>",
+            choices: ["Claude Shannon", "Charles Babbage", "Von Neumann", "Alan Turing"],
+            correctAnswer: 1,
+            imgSource: "assets/images/Babbage.jpg",
+
+        },
+        {
+            question: "<h4>Who is the founder of Bluetooth?<h4>",
+            choices: ["Ericsson", "IBM", "Apple", "Dell"],
+            correctAnswer: 0,
+            imgSource: "assets/images/Ericsson.png",
 
         }
+
     ]
 
     var timerId = "#timer";
@@ -86,7 +114,6 @@ $(document).ready(function () {
         postQuestions();
         startTimer(timer);
 
-        console.log(timer);
         $("#game").on("click", ".buttons", function () {
 
             if (event.toElement.id === "optionThree") {
@@ -97,7 +124,7 @@ $(document).ready(function () {
                 rightAnswers++;
                 answers = rightAnswers + wrongAnswers;
                 myVar = setTimeout(clearInterem, 5000);
-                //myVarTwo = setTimeout(gameTwo, 5001);
+                myVarTwo = setTimeout(gameTwo, 5001);
 
             }
 
@@ -110,7 +137,7 @@ $(document).ready(function () {
                 wrongAnswers++;
                 answers = rightAnswers + wrongAnswers;
                 myVar = setTimeout(clearInterem, 5000);
-                //myVarTwo = setTimeout(gameTwo, 5001);
+                myVarTwo = setTimeout(gameTwo, 5001);
 
             }
 
@@ -136,10 +163,12 @@ $(document).ready(function () {
                 $("#image").html("<img src=" + staticQuestionArray[1].imgSource + "></img>");
                 rightAnswers++;
                 answers = rightAnswers + wrongAnswers;
+                myVar = setTimeout(clearInterem, 5000);
+                myVarTwo = setTimeout(gameTwo, 5001);
 
 
             }
-            if (event.toElement.id != "optionOne") {
+            else if (event.toElement.id != "optionOne") {
                 console.log("adam");
                 flagOne = true;
                 clearQuestions()
@@ -148,6 +177,8 @@ $(document).ready(function () {
                 $("#image").html("<img src=" + staticQuestionArray[1].imgSource + "></img>");
                 wrongAnswers++;
                 answers = rightAnswers + wrongAnswers;
+                myVar = setTimeout(clearInterem, 5000);
+                myVarTwo = setTimeout(gameTwo, 5001);
             }
         });
 
@@ -157,12 +188,12 @@ $(document).ready(function () {
 
         $("#start").html("");
         gameOne();
-        console.log("adam");
-        console.log("flagOne : " + flagOne)
-        if (flagOne === true) {
-            console.log("adam");
-            gameTwo();
-        }
+        // console.log("adam");
+        // console.log("flagOne : " + flagOne)
+        // if (flagOne === true) {
+        //     console.log("adam");
+        //     gameTwo();
+        // }
 
 
 
