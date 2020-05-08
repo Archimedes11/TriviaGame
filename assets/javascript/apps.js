@@ -1,5 +1,8 @@
 $(document).ready(function () {
-    var flagOne = true;
+    var flagOne = false;
+    rightAnswers = 0;
+    wrongAnswers = 0;
+    answers = rightAnswers + wrongAnswers;
     $(".display-4").text("Computer Trivia");
     $("#start").append("<h3>Start</h3>");
 
@@ -13,71 +16,121 @@ $(document).ready(function () {
             imgSource: "assets/images/Hardware.png",
         },
         {
-            question: "Q2",
-            choices: 100,
-            correctAnswer: 10,
-            counterDmg: 8,
+            question: "<h4>'Linux' is an example of :<h4>",
+            choices: ["Operating System", "Application", "Software", "Browser"],
+            correctAnswer: 0,
+            imgSource: "assets/images/OperatingSystem.jpeg",
 
         },
         {
-            question: "Q3",
-            choices: 150,
-            correctAnswer: 6,
-            counterDmg: 10,
+            question: "<h4>The generic term for the mechanical, electrical and electronic components of a computer are called what?<h4>",
+            choices: ["Freeware", "Software", "Hardware", "Malware"],
+            correctAnswer: 3,
+            imgSource: "assets/images/Hardware.png",
 
         },
         {
-            question: "Q4",
-            choices: 140,
-            correctAnswer: 8,
-            counterDmg: 13,
+            question: "<h4>The generic term for the mechanical, electrical and electronic components of a computer are called what?<h4>",
+            choices: ["Freeware", "Software", "Hardware", "Malware"],
+            correctAnswer: 3,
+            imgSource: "assets/images/Hardware.png",
 
         }
     ]
+    var timerId = "#timer";
+    function startTimer() {
+        clearInterval(timerId);
+        timerId = setInterval(decrement, 1000);
+        function decrement() {
+            timer--;
+            $("#timer").html("<h2>" + "Time Remaining: " + timer + "</h2>");
+            function stop() {
+                clearInterval(timerId);
+            }
+            if (timer === 0 || flagOne === true) {
+                stop();
 
+            }
+        }
+    }
 
+    function clearQuestions() {
+        $("#question").html("");
+        $("#optionOne").html("");
+        $("#optionTwo").html("");
+        $("#optionThree").html("");
+        $("#optionFour").html("");
+    }
+    
 
     $("#start").on("click", function () {
 
-        $("#start").html("");
-        $("#question").html(staticQuestionArray[0].question)
-        $("#optionOne").html(staticQuestionArray[0].choices[0]);
-        $("#optionTwo").html(staticQuestionArray[0].choices[1]);
-        $("#optionThree").html(staticQuestionArray[0].choices[2]);
-        $("#optionFour").html(staticQuestionArray[0].choices[3]);
+        if (answers === 0) {
+            $("#start").html("");
+            $("#question").html(staticQuestionArray[0].question)
+            $("#optionOne").html(staticQuestionArray[0].choices[0]);
+            $("#optionTwo").html(staticQuestionArray[0].choices[1]);
+            $("#optionThree").html(staticQuestionArray[0].choices[2]);
+            $("#optionFour").html(staticQuestionArray[0].choices[3]);
 
-        console.log(event.path);
-        var timerId = "#timer";
+            startTimer();
 
-        function startTimer() {
-            clearInterval(timerId);
-            timerId = setInterval(decrement, 1000);
-            function decrement() {
-                timer--;
-                $("#timer").html("<h2>" + "Time Remaining: " + timer + "</h2>");
-                function stop() {
-                    clearInterval(timerId);
+            $(".buttons").on("click", function () {
+                if (event.toElement.id === "optionThree") {
+                    flagOne = true;
+                    clearQuestions()
+                    $("#condition").html("<h3>" + "Correct!" + "</h3>");
+                    $("#image").append("<img src=" + staticQuestionArray[0].imgSource + "></img>");
+                    rightAnswers++;
                 }
-                if (timer === 0) {
-                    stop();
-                    $(".end").toggle();
+
+                if (event.toElement.id != "optionThree") {
+                    flagOne = true;
+                    clearQuestions()
+                    $("#condition").html("<h3>" + "Incorrect!" + "</h3>");
+                    $("#correctAnswer").html("The corect answer was : " + staticQuestionArray[0].choices[2]);
+                    $("#image").append("<img src=" + staticQuestionArray[0].imgSource + "></img>");
+                    wrongAnswers++;
                 }
-            }
+                
+            })
         }
-        startTimer();
-
-        $(".buttons").on("click", function () {
-            console.log(event.toElement.id);
-            if (event.toElement.id === "optionThree")
-                console.log("adam");
-                $("#image").append("<img src=assets/images/Hardware.png></img>");
+        console.log("adam");
 
 
+        //////////////////part 2
+
+        if (answers === 1) {
+            $("#question").html(staticQuestionArray[1].question)
+            $("#optionOne").html(staticQuestionArray[1].choices[0]);
+            $("#optionTwo").html(staticQuestionArray[1].choices[1]);
+            $("#optionThree").html(staticQuestionArray[1].choices[2]);
+            $("#optionFour").html(staticQuestionArray[1].choices[3]);
+
+            startTimer();
+
+            $(".buttons").on("click", function () {
+                if (event.toElement.id === "optionOne") {
+                    flagOne = true;
+                    clearQuestions()
+                    $("#condition").html("<h3>" + "Correct!" + "</h3>");
+                    $("#image").append("<img src=" + staticQuestionArray[1].imgSource + "></img>");
+                }
+                if (event.toElement.id != "optionOne") {
+                    flagOne = true;
+                    clearQuestions()
+                    $("#condition").html("<h3>" + "Incorrect!" + "</h3>");
+                    $("#correctAnswer").html("The corect answer was : " + staticQuestionArray[1].choices[0]);
+                    $("#image").append("<img src=" + staticQuestionArray[1].imgSource + "></img>");
+                }
+
+            })
+        }
 
 
 
 
-        })
+
 
     });
 
