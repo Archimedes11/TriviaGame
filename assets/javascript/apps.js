@@ -61,7 +61,7 @@ $(document).ready(function () {
         $("#optionThree").html("");
         $("#optionFour").html("");
     }
-    
+
 
     $("#start").on("click", function () {
 
@@ -94,13 +94,16 @@ $(document).ready(function () {
                 }
                 
             })
+            
         }
-        console.log("adam");
+        
 
 
         //////////////////part 2
 
         if (answers === 1) {
+            
+
             $("#question").html(staticQuestionArray[1].question)
             $("#optionOne").html(staticQuestionArray[1].choices[0]);
             $("#optionTwo").html(staticQuestionArray[1].choices[1]);
