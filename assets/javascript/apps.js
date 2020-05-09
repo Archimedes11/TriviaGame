@@ -1,6 +1,7 @@
 $(document).ready(function () {
     var flagOne = false;
-    var flagTwo = true;
+    var flagTwo = false;
+    var round = 0;
     rightAnswers = 0;
     wrongAnswers = 0;
     answers = 0;
@@ -73,15 +74,15 @@ $(document).ready(function () {
         timerId = setInterval(decrement, 1000);
         function decrement() {
             timer--;
-            console.log("timer in the function : " + timer);
+            // console.log("timer in the function : " + timer);
             $("#timer").html("<h2>" + "Time Remaining: " + timer + "</h2>");
             function stop() {
                 clearInterval(timerId);
             }
             if (timer === 0 || flagOne === true) {
                 stop();
-                return timer;
-
+                flagOne = false;
+                // return timer;
             }
         }
     }
@@ -111,40 +112,42 @@ $(document).ready(function () {
 
 
     function gameOne() {
+        round++;
         postQuestions();
-        startTimer(timer);
+        startTimer();
+        console.log("answers :" + answers);
 
         $("#game").on("click", ".buttons", function () {
+            
 
-            if (event.toElement.id === "optionThree") {
+            if (event.toElement.id === "optionThree" && answers === 0) {
                 flagOne = true;
                 clearQuestions()
                 $("#condition").html("<h3>" + "Correct!" + "</h3>");
                 $("#image").append("<img src=" + staticQuestionArray[0].imgSource + "></img>");
                 rightAnswers++;
-                answers = rightAnswers + wrongAnswers;
-                myVar = setTimeout(clearInterem, 5000);
-                myVarTwo = setTimeout(gameTwo, 5001);
+                answers++;
+                myVarOne = setTimeout(clearInterem, 5000);
+                myVarOne = setTimeout(gameTwo, 5001);
 
             }
 
-            if (event.toElement.id != "optionThree") {
+            else if (event.toElement.id != "optionThree" && answers === 0) {
                 flagOne = true;
                 clearQuestions()
                 $("#condition").html("<h3>" + "Incorrect!" + "</h3>");
                 $("#correctAnswer").html("The corect answer was : " + staticQuestionArray[0].choices[2]);
                 $("#image").append("<img src=" + staticQuestionArray[0].imgSource + "></img>");
                 wrongAnswers++;
-                answers = rightAnswers + wrongAnswers;
-                myVar = setTimeout(clearInterem, 5000);
-                myVarTwo = setTimeout(gameTwo, 5001);
+                answers++;
+                myVarOne = setTimeout(clearInterem, 5000);
+                myVarOne = setTimeout(gameTwo, 5001);
 
             }
 
         });
 
     }
-
 
     function gameTwo() {
         console.log("game two");
@@ -152,48 +155,288 @@ $(document).ready(function () {
         timer = 30;
         postQuestions();
         startTimer();
+        console.log("answers :" + answers);
+        console.log("right answers :" + rightAnswers);
 
         $("#game").on("click", ".buttons", function () {
             // console.log(event.toElement.id);
             // console.log("answers = " + answers);
-            if (event.toElement.id === "optionOne") {
+            if (event.toElement.id === "optionOne"  && answers === 1) {
                 flagOne = true;
                 clearQuestions()
                 $("#condition").html("<h3>" + "Correct!" + "</h3>");
-                $("#image").html("<img src=" + staticQuestionArray[1].imgSource + "></img>");
+                $("#image").html("<img src=" + staticQuestionArray[answers].imgSource + "></img>");
                 rightAnswers++;
-                answers = rightAnswers + wrongAnswers;
-                myVar = setTimeout(clearInterem, 5000);
-                myVarTwo = setTimeout(gameTwo, 5001);
+                answers++;
+                myVarTwo = setTimeout(clearInterem, 5000);
+                myVarTwo = setTimeout(gameThree, 5001);
 
 
             }
-            else if (event.toElement.id != "optionOne") {
+            else if (event.toElement.id != "optionOne" && answers === 1) {
                 console.log("adam");
                 flagOne = true;
                 clearQuestions()
                 $("#condition").html("<h3>" + "Incorrect!" + "</h3>");
-                $("#correctAnswer").html("The corect answer was : " + staticQuestionArray[1].choices[0]);
-                $("#image").html("<img src=" + staticQuestionArray[1].imgSource + "></img>");
+                $("#correctAnswer").html("The corect answer was : " + staticQuestionArray[answers].choices[staticQuestionArray[answers].correctAnswer]);
+                $("#image").html("<img src=" + staticQuestionArray[answers].imgSource + "></img>");
                 wrongAnswers++;
-                answers = rightAnswers + wrongAnswers;
-                myVar = setTimeout(clearInterem, 5000);
-                myVarTwo = setTimeout(gameTwo, 5001);
+                answers++;
+                myVarTwo = setTimeout(clearInterem, 5000);
+                myVarTwo = setTimeout(gameThree, 5001);
             }
         });
 
     }
 
+    function gameThree() {
+        console.log("game three");
+
+        timer = 30;
+        postQuestions();
+        startTimer();
+        console.log("answers :" + answers);
+        console.log("right answers :" + rightAnswers);
+
+        $("#game").on("click", ".buttons", function () {
+            // console.log(event.toElement.id);
+            // console.log("answers = " + answers);
+            if (event.toElement.id === "optionThree" && answers === 2) {
+                flagOne = true;
+                clearQuestions()
+                $("#condition").html("<h3>" + "Correct!" + "</h3>");
+                $("#image").html("<img src=" + staticQuestionArray[2].imgSource + "></img>");
+                rightAnswers++;
+                answers++;
+                myVarThree = setTimeout(clearInterem, 5000);
+                myVarThree = setTimeout(gameFour, 5001);
+
+
+            }
+            else if (event.toElement.id != "optionThree" && answers === 2) {
+                console.log("adam");
+                flagOne = true;
+                clearQuestions()
+                $("#condition").html("<h3>" + "Incorrect!" + "</h3>");
+                $("#correctAnswer").html("The corect answer was : " + staticQuestionArray[2].choices[2]);
+                $("#image").html("<img src=" + staticQuestionArray[2].imgSource + "></img>");
+                wrongAnswers++;
+                answers++;
+                myVarThree = setTimeout(clearInterem, 5000);
+                myVarThree = setTimeout(gameFour, 5001);
+            }
+        });
+
+    }
+
+    function gameFour() {
+        console.log("game four");
+
+        timer = 30;
+        postQuestions();
+        startTimer();
+        console.log("answers :" + answers);
+        console.log("right answers :" + rightAnswers);
+
+        $("#game").on("click", ".buttons", function () {
+            // console.log(event.toElement.id);
+            // console.log("answers = " + answers);
+            if (event.toElement.id === "optionFour" && answers === 3) {
+                flagOne = true;
+                clearQuestions()
+                $("#condition").html("<h3>" + "Correct!" + "</h3>");
+                $("#image").html("<img src=" + staticQuestionArray[3].imgSource + "></img>");
+                rightAnswers++;
+                answers++;
+                myVarFour = setTimeout(clearInterem, 5000);
+                myVarFour = setTimeout(gameFive, 5001);
+
+
+            }
+            else if (event.toElement.id != "optionFour" && answers === 3) {
+                flagOne = true;
+                clearQuestions()
+                $("#condition").html("<h3>" + "Incorrect!" + "</h3>");
+                $("#correctAnswer").html("The corect answer was : " + staticQuestionArray[3].choices[3]);
+                $("#image").html("<img src=" + staticQuestionArray[3].imgSource + "></img>");
+                wrongAnswers++;
+                answers++;
+                myVarFour = setTimeout(clearInterem, 5000);
+                myVarFour = setTimeout(gameFive, 5001);
+            }
+        });
+
+    }
+
+    function gameFive() {
+        console.log("game five");
+
+        timer = 30;
+        postQuestions();
+        startTimer();
+        console.log("answers :" + answers);
+        console.log("right answers :" + rightAnswers);
+
+        $("#game").on("click", ".buttons", function () {
+            // console.log(event.toElement.id);
+            // console.log("answers = " + answers);
+            if (event.toElement.id === "optionThree" && answers === 4) {
+                flagOne = true;
+                clearQuestions()
+                $("#condition").html("<h3>" + "Correct!" + "</h3>");
+                $("#image").html("<img src=" + staticQuestionArray[2].imgSource + "></img>");
+                rightAnswers++;
+                answers++;
+                myVarFive = setTimeout(clearInterem, 5000);
+                myVarFive = setTimeout(gameSix, 5001);
+
+
+            }
+            else if (event.toElement.id != "optionThree" && answers === 4) {
+                console.log("adam");
+                flagOne = true;
+                clearQuestions()
+                $("#condition").html("<h3>" + "Incorrect!" + "</h3>");
+                $("#correctAnswer").html("The corect answer was : " + staticQuestionArray[2].choices[2]);
+                $("#image").html("<img src=" + staticQuestionArray[2].imgSource + "></img>");
+                wrongAnswers++;
+                answers++;
+                myVarFive = setTimeout(clearInterem, 5000);
+                myVarFive = setTimeout(gameSix, 5001);
+            }
+        });
+
+    }
+
+    function gameSix() {
+        console.log("game six");
+
+        timer = 30;
+        postQuestions();
+        startTimer();
+        console.log("answers :" + answers);
+        console.log("right answers :" + rightAnswers);
+
+        $("#game").on("click", ".buttons", function () {
+            // console.log(event.toElement.id);
+            // console.log("answers = " + answers);
+            if (event.toElement.id === "optionThree" && answers === 5) {
+                flagOne = true;
+                clearQuestions()
+                $("#condition").html("<h3>" + "Correct!" + "</h3>");
+                $("#image").html("<img src=" + staticQuestionArray[2].imgSource + "></img>");
+                rightAnswers++;
+                answers++;
+                myVarSix = setTimeout(clearInterem, 5000);
+                myVarSix = setTimeout(gameSeven, 5001);
+
+
+            }
+            else if (event.toElement.id != "optionThree" && answers === 5) {
+                console.log("adam");
+                flagOne = true;
+                clearQuestions()
+                $("#condition").html("<h3>" + "Incorrect!" + "</h3>");
+                $("#correctAnswer").html("The corect answer was : " + staticQuestionArray[2].choices[2]);
+                $("#image").html("<img src=" + staticQuestionArray[2].imgSource + "></img>");
+                wrongAnswers++;
+                answers++;
+                myVarSix = setTimeout(clearInterem, 5000);
+                myVarSix = setTimeout(gameSeven, 5001);
+            }
+        });
+
+    }
+
+    function gameSeven() {
+        console.log("game seven");
+
+        timer = 30;
+        postQuestions();
+        startTimer();
+        console.log("answers :" + answers);
+        console.log("right answers :" + rightAnswers);
+
+        $("#game").on("click", ".buttons", function () {
+            // console.log(event.toElement.id);
+            // console.log("answers = " + answers);
+            if (event.toElement.id === "optionThree" && answers === 6) {
+                flagOne = true;
+                clearQuestions()
+                $("#condition").html("<h3>" + "Correct!" + "</h3>");
+                $("#image").html("<img src=" + staticQuestionArray[2].imgSource + "></img>");
+                rightAnswers++;
+                answers++;
+                myVarSeven = setTimeout(clearInterem, 5000);
+                myVarSeven = setTimeout(gameEight, 5001);
+
+
+            }
+            else if (event.toElement.id != "optionThree" && answers === 6) {
+                console.log("adam");
+                flagOne = true;
+                clearQuestions()
+                $("#condition").html("<h3>" + "Incorrect!" + "</h3>");
+                $("#correctAnswer").html("The corect answer was : " + staticQuestionArray[2].choices[2]);
+                $("#image").html("<img src=" + staticQuestionArray[2].imgSource + "></img>");
+                wrongAnswers++;
+                answers++;
+                myVarSeven = setTimeout(clearInterem, 5000);
+                myVarSeven = setTimeout(gameEight, 5001);
+            }
+        });
+
+    }
+
+    function gameEight() {
+        console.log("game eight");
+
+        timer = 30;
+        postQuestions();
+        startTimer();
+        console.log("answers :" + answers);
+        console.log("right answers :" + rightAnswers);
+
+        $("#game").on("click", ".buttons", function () {
+            // console.log(event.toElement.id);
+            // console.log("answers = " + answers);
+            if (event.toElement.id === "optionThree" && answers === 7) {
+                flagOne = true;
+                clearQuestions()
+                $("#condition").html("<h3>" + "Correct!" + "</h3>");
+                $("#image").html("<img src=" + staticQuestionArray[2].imgSource + "></img>");
+                rightAnswers++;
+                answers++;
+                myVarEight = setTimeout(clearInterem, 5000);
+                //myVarEight = setTimeout(reset, 5001);
+
+
+            }
+            else if (event.toElement.id != "optionThree" && answers === 7) {
+                console.log("adam");
+                flagOne = true;
+                clearQuestions()
+                $("#condition").html("<h3>" + "Incorrect!" + "</h3>");
+                $("#correctAnswer").html("The corect answer was : " + staticQuestionArray[2].choices[2]);
+                $("#image").html("<img src=" + staticQuestionArray[2].imgSource + "></img>");
+                wrongAnswers++;
+                answers++;
+                myVarEight = setTimeout(clearInterem, 5000);
+                // myVarEight = setTimeout(reset, 5001);
+            }
+        });
+
+    }
+
+
+
     $("#start").one("click", function () {
 
         $("#start").html("");
+        if (answers < 1){
         gameOne();
-        // console.log("adam");
-        // console.log("flagOne : " + flagOne)
-        // if (flagOne === true) {
-        //     console.log("adam");
-        //     gameTwo();
-        // }
+        }
+        
 
 
 
