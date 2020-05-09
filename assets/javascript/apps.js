@@ -5,6 +5,10 @@ $(document).ready(function () {
     rightAnswers = 0;
     wrongAnswers = 0;
     answers = 0;
+
+    var science= new Audio('assets/music/Science.mp3');
+    
+
     $(".display-4").text("Computer Trivia");
     $("#start").append("<h3>Start</h3>");
 
@@ -124,7 +128,7 @@ $(document).ready(function () {
                 flagOne = true;
                 clearQuestions()
                 $("#condition").html("<h3>" + "Correct!" + "</h3>");
-                $("#image").append("<img src=" + staticQuestionArray[0].imgSource + "></img>");
+                $("#image").append("<img src=" + staticQuestionArray[answers].imgSource + "></img>");
                 rightAnswers++;
                 answers++;
                 myVarOne = setTimeout(clearInterem, 5000);
@@ -136,8 +140,8 @@ $(document).ready(function () {
                 flagOne = true;
                 clearQuestions()
                 $("#condition").html("<h3>" + "Incorrect!" + "</h3>");
-                $("#correctAnswer").html("The corect answer was : " + staticQuestionArray[0].choices[2]);
-                $("#image").append("<img src=" + staticQuestionArray[0].imgSource + "></img>");
+                $("#correctAnswer").html("The corect answer was : " + staticQuestionArray[answers].choices[staticQuestionArray[answers].correctAnswer]);
+                $("#image").append("<img src=" + staticQuestionArray[answers].imgSource + "></img>");
                 wrongAnswers++;
                 answers++;
                 myVarOne = setTimeout(clearInterem, 5000);
@@ -433,6 +437,7 @@ $(document).ready(function () {
     $("#start").one("click", function () {
 
         $("#start").html("");
+        science.play();
         if (answers < 1){
         gameOne();
         }
