@@ -4,10 +4,11 @@ $(document).ready(function () {
     var round = 0;
     rightAnswers = 0;
     wrongAnswers = 0;
+    unanswered = 0;
     answers = 0;
 
-    var science= new Audio('assets/music/Science.mp3');
-    
+    var science = new Audio('assets/music/Science.mp3');
+
 
     $(".display-4").text("Computer Trivia");
     $("#start").append("<h3>Start</h3>");
@@ -78,16 +79,23 @@ $(document).ready(function () {
         timerId = setInterval(decrement, 1000);
         function decrement() {
             timer--;
-            
+
             $("#timer").html("<h2>" + "Time Remaining: " + timer + "</h2>");
             function stop() {
                 clearInterval(timerId);
             }
-            if (timer === 0 || flagOne === true) {
+            if (flagOne === true) {
                 stop();
                 flagOne = false;
-                
             }
+            if (timer === 0) {
+                stop();
+                flagTwo = true;
+            }
+
+
+
+
         }
     }
 
@@ -119,12 +127,37 @@ $(document).ready(function () {
         round++;
         postQuestions();
         startTimer();
-        console.log("answers :" + answers);
+        console.log(flagTwo);
+        // if (flagTwo === true) {
+        //     console.log(flagTwo);
+        //     clearQuestions()
+        //     $("#condition").html("<h3>" + "Out of Time!" + "</h3>");
+        //     $("#correctAnswer").html("The corect answer was : " + staticQuestionArray[answers].choices[staticQuestionArray[answers].correctAnswer]);
+        //     $("#image").append("<img src=" + staticQuestionArray[answers].imgSource + "></img>");
+        //     unanswered++;
+        //     answers++;
+        //     flagTwo=true;
+        //     myVarOne = setTimeout(clearInterem, 5000);
+        //     myVarOne = setTimeout(gameTwo, 5001);
+        //}
 
         $("#game").on("click", ".buttons", function () {
-            
 
-            if (event.toElement.id === "optionThree" && answers === 0) {
+
+
+            if (flagTwo === true) {
+                clearQuestions()
+                $("#condition").html("<h3>" + "Out of Time!" + "</h3>");
+                $("#correctAnswer").html("The corect answer was : " + staticQuestionArray[answers].choices[staticQuestionArray[answers].correctAnswer]);
+                $("#image").append("<img src=" + staticQuestionArray[answers].imgSource + "></img>");
+                unanswered++;
+                answers++;
+                flagTwo=false;
+                myVarOne = setTimeout(clearInterem, 5000);
+                myVarOne = setTimeout(gameTwo, 5001);
+            }
+
+            else if (event.toElement.id === "optionThree" && answers === 0) {
                 flagOne = true;
                 clearQuestions()
                 $("#condition").html("<h3>" + "Correct!" + "</h3>");
@@ -147,6 +180,8 @@ $(document).ready(function () {
                 myVarOne = setTimeout(clearInterem, 5000);
                 myVarOne = setTimeout(gameTwo, 5001);
 
+
+
             }
 
         });
@@ -165,7 +200,7 @@ $(document).ready(function () {
         $("#game").on("click", ".buttons", function () {
             // console.log(event.toElement.id);
             // console.log("answers = " + answers);
-            if (event.toElement.id === "optionOne"  && answers === 1) {
+            if (event.toElement.id === "optionOne" && answers === 1) {
                 flagOne = true;
                 clearQuestions()
                 $("#condition").html("<h3>" + "Correct!" + "</h3>");
@@ -425,10 +460,10 @@ $(document).ready(function () {
 
         $("#start").html("");
         science.play();
-        if (answers < 1){
-        gameOne();
+        if (answers < 1) {
+            gameOne();
         }
-        
+
 
 
 
