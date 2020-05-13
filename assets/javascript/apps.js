@@ -9,7 +9,6 @@ $(document).ready(function () {
 
     var science = new Audio('assets/music/Science.mp3');
 
-
     $(".display-4").text("Computer Trivia");
     $("#start").append("<h3>Start</h3>");
 
@@ -70,7 +69,6 @@ $(document).ready(function () {
             imgSource: "assets/images/Ericsson.png",
 
         }
-
     ]
 
     var timerId = "#timer";
@@ -92,10 +90,6 @@ $(document).ready(function () {
                 stop();
                 flagTwo = true;
             }
-
-
-
-
         }
     }
 
@@ -121,9 +115,38 @@ $(document).ready(function () {
         $("#image").html("");
     }
 
+    function reset() {
+        $("#condition").html("All done, here's how you did!");
+        $("#correct").html("Correct Abswers: " + rightAnswers);
+        $("#incorrect").html("Incorrect Answers: " + wrongAnswers);
+        $("#unanswered").html("Ran out of time: " + unanswered);
+        $("#restart").html("<h3>Start Over?</h3>");
+
+        $("#restart").one("click", function () {
+            $("#restart").html("");
+            $("#condition").html("");
+            $("#correct").html("");
+            $("#incorrect").html("");
+            $("#unanswered").html("");
+
+            location.reload();
+
+        });
+    }
+
 
 
     function gameOne() {
+
+        if (answers > 0) {
+            rightAnswers = 0;
+            wrongAnswers = 0;
+            unanswered = 0;
+            answers = 0;
+            var flagOne = false;
+            var flagTwo = false;
+        }
+
         round++;
         postQuestions();
         startTimer();
@@ -176,7 +199,7 @@ $(document).ready(function () {
         startTimer();
 
         $("#game").on("click", ".buttons", function () {
-            
+
             if (flagTwo === true) {
                 clearQuestions()
                 $("#condition").html("<h3>" + "Out of Time!" + "</h3>");
@@ -460,7 +483,7 @@ $(document).ready(function () {
                 answers++;
                 flagTwo = false;
                 myVarOne = setTimeout(clearInterem, 5000);
-                // myVarOne = setTimeout(reset, 5001);
+                myVarOne = setTimeout(reset, 5001);
             }
 
             else if (event.toElement.id === "optionOne" && answers === 7) {
@@ -471,7 +494,7 @@ $(document).ready(function () {
                 rightAnswers++;
                 answers++;
                 myVarEight = setTimeout(clearInterem, 5000);
-                //myVarEight = setTimeout(reset, 5001);
+                myVarEight = setTimeout(reset, 5001);
 
 
             }
@@ -485,7 +508,7 @@ $(document).ready(function () {
                 wrongAnswers++;
                 answers++;
                 myVarEight = setTimeout(clearInterem, 5000);
-                // myVarEight = setTimeout(reset, 5001);
+                myVarEight = setTimeout(reset, 5001);
             }
         });
     }

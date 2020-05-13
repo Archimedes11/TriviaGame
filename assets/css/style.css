@@ -3,6 +3,9 @@
     src: url('../fonts/Potra.ttf');
 }
 
+#restart{
+  margin-top: 25px;
+}
 
 /* Style the video: 100% width and height to cover the entire window */
 #myVideo {
@@ -27,7 +30,7 @@
     width: 50%;
     text-align: center;
     margin-bottom: 20px;
-    bottom: 320px;
+    bottom: 190px;
   }
 
   body{
